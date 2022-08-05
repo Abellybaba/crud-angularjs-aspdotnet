@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>angularjs</id>
+    <version>1.8.2</version>
+    <title>AngularJS</title>
+    <authors>Fitzchak Yitzchaki, Dov Landau</authors>
+    <owners>Fitzchak Yitzchaki, Dov Landau</owners>
+    <projectUrl>http://angularjs.org/</projectUrl>
+    <iconUrl>https://api.nuget.org/v3-flatcontainer/angularjs/1.8.2/icon</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>AngularJS. HTML enhanced for web apps!</description>
+    <summary />
+    <tags>angular angularjs SPA</tags>
+  </metadata>
+</package>

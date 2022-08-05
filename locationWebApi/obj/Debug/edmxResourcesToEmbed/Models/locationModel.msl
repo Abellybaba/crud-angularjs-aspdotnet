@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="newDBModelStoreContainer" CdmEntityContainer="newDBEntities">
+    <EntitySetMapping Name="locations">
+      <EntityTypeMapping TypeName="newDBModel.location">
+        <MappingFragment StoreEntitySet="locations">
+          <ScalarProperty Name="location_id" ColumnName="location_id" />
+          <ScalarProperty Name="street_address" ColumnName="street_address" />
+          <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state_province" ColumnName="state_province" />
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

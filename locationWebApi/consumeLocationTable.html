@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Web Api consume sql Database</title>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" />
+    <script>
+        var app = angular.module("Myapp", []);
+        app.controller("Mycontroller", function ($scope, $http) {
+
+            //function to insert in database
+            $scope.addNewLocationRec = function ()
+            {
+                var buttonClick = document.getElementById("btnClick").getAttribute("value");
+                if (buttonClick == "insert") {
+                    $scope.loc = {};
+                    $scope.loc.location_id = $scope.location;
+                    $scope.loc.street_address = $scope.address;
+                    $scope.loc.postal_code = $scope.postal;
+                    $scope.loc.city = $scope.city;
+                    $scope.loc.state_province = $scope.province;
+                    $scope.loc.country_id = $scope.country;
+                    $http({
+                        method: 'POST',
+                        url: 'http://localhost:54874/api/locationRecord',
+                        data: JSON.stringify($scope.loc)
+
+                    }).then(function (result) {
+                        alert(result.data)
+                        //clear the box
+                        $scope.location = "";
+                        $scope.address = "";
+                        $scope.postal = "";
+                        $scope.city = "";
+                        $scope.province = "";
+                        $scope.country = "";
+
+                    });
+                }
+            }
+
+
+            //function to get and populate table
+            $http({
+                method: 'GET',
+                url: 'http://localhost:54874/api/locationRecord'
+            }).then(function (result) {
+                $scope.getLocationRec = result.data;
+            });
+        })
+    </script>
+
+
+</head>
+<body>
+    <div class="container" ng-app="Myapp" ng-controller="Mycontroller">
+
+
+        <center>
+            <h1>Consume WebAPI 2 into HTML Table</h1>
+            <h1>using AngularJS</h1>
+        </center>
+
+        <hr />
+
+        <center>
+            <div class="container w-50 border shadow-lg">
+
+                <div class="form-group">
+                    <label for="location">Location ID:</label>
+                    <input type="text" class="form-control" ng-model="location">
+                </div>
+                <div class="form-group">
+                    <label for="address">Street Address:</label>
+                    <input type="text" class="form-control" ng-model="address">
+                </div>
+                <div class="form-group">
+                    <label for="postal">Postal Code:</label>
+                    <input type="text" class="form-control" ng-model="postal">
+                </div>
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" class="form-control" ng-model="city">
+                </div>
+                <div class="form-group">
+                    <label for="province">Province:</label>
+                    <input type="text" class="form-control" ng-model="province">
+                </div>
+                <div class="form-group">
+                    <label for="country">Country ID:</label>
+                    <input type="text" class="form-control" ng-model="country">
+                </div>
+                <div class="form-group text-center">
+                    <button type="button" id="btnClick" value="insert" class="btn btn-primary my-2" ng-click="addNewLocationRec()">Submit</button>
+                    <button type="button" id="btnCancel" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+
+            <hr />
+        </center>
+        <div class="container-fluid w-90">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        
+                        <th scope="col">LocationID</th>
+                        <th scope="col">Street Address</th>
+                        <th scope="col">Postal Code</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Province</th>
+                        <th scope="col">CountryID</th>
+                        <th scope="col">Edit/Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in getLocationRec">
+                        
+                        <td>{{x.location_id}}</td>
+                        <td>{{x.street_address}}</td>
+                        <td>{{x.postal_code}}</td>
+                        <td>{{x.city}}</td>
+                        <td>{{x.state_province}}</td>
+                        <td>{{x.country_id}}</td>
+                        <td>
+                            <a class="btn btn-warning btn-xs">
+                                <span class="">Edit</span>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger btn-xs">
+                                <span class="">Delete</span>
+                            </a>
+                        </td>  
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div> 
+</body>
+</html>
